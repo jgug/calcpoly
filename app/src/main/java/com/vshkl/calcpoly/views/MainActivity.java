@@ -51,13 +51,14 @@ public class MainActivity extends AppCompatActivity {
 
                 double[] coefficients = getCoefficients();
 
-                Callback callback = new Callback(
-                        coefficients[0], coefficients[1], coefficients[2], coefficients[3]);
-                cpoly.setCallback(callback);
-                double results[] = calculatePoints(cpoly);
+//                Callback callback = new Callback(
+//                        coefficients[0], coefficients[1], coefficients[2], coefficients[3]);
+//                cpoly.setCallback(callback);
+//                double results[] = calculatePoints(cpoly);
 
                 Bundle bundle = new Bundle();
-                bundle.putDoubleArray("points", results);
+//                bundle.putDoubleArray("points", results);
+                bundle.putDoubleArray("coefficients", coefficients);
 
                 Intent intent = new Intent(getApplicationContext(), PlotActivity.class);
                 intent.putExtras(bundle);
