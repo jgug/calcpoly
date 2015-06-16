@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:defaultValue="@string/pref_max_default"
+        android:inputType="numberDecimal"
+        android:key="@string/pref_max_key"
+        android:selectAllOnFocus="true"
+        android:summary="@string/pref_max_description"
+        android:title="@string/pref_max_title" />
+
+    <EditTextPreference
+        android:defaultValue="@string/pref_step_default"
+        android:inputType="numberDecimal"
+        android:key="@string/pref_step_key"
+        android:selectAllOnFocus="true"
+        android:summary="@string/pref_step_description"
+        android:title="@string/pref_step_title" />
+
+</PreferenceScreen>

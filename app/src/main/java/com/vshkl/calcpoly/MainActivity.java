@@ -1,7 +1,9 @@
 package com.vshkl.calcpoly;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 
 import com.vshkl.calcpoly.logic.Callback;
 import com.vshkl.calcpoly.logic.Storage;
+import com.vshkl.calcpoly.settings.SettigsActivity;
 import com.vshkl.core.CPolynomialCalculator;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,11 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 Callback callback = new Callback(
                         coefficients[0], coefficients[1], coefficients[2], coefficients[3]);
                 cpoly.setCallback(callback);
-                double results[] = calculatePoints(MAXVALUE, STEP, cpoly);
+                double results[] = calculatePoints(cpoly);
 
                 Bundle bundle = new Bundle();
                 bundle.putDoubleArray("points", results);
-                bundle.putInt("size", MAXVALUE);
 
                 Intent intent = new Intent(getApplicationContext(), PlotActivity.class);
                 intent.putExtras(bundle);
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettigsActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -85,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if (Storage.hasFile(getApplicationContext())) {
-            fillEditTexts(Storage.restoreData(getApplicationContext()));
+        if (Storage.hasFile(this)) {
+            fillEditTexts(Storage.restoreData(this));
         }
     }
 
@@ -94,19 +98,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        Storage.storeData(getApplicationContext(), getCoefficients());
+        Storage.storeData(this, getCoefficients());
     }
 
     /**
      * Method for calculating point for plot
-     * @param maxValue max value to calculate
-     * @param step calculation step
      * @param cpoly CPolynomialCalculator object
      * @return double[]
      */
-    public double[] calculatePoints(int maxValue, int step, CPolynomialCalculator cpoly) {
-        double[] array = new double[maxValue];
-        for (int i = 0; i < maxValue; i += step) {
+    public double[] calculatePoints(CPolynomialCalculator cpoly) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int max = Integer.parseInt(preferences.getString(
+                getString(R.string.pref_max_key), getString(R.string.pref_max_default)));
+        int step = Integer.parseInt(preferences.getString(
+                getString(R.string.pref_step_key), getString(R.string.pref_step_default)));
+        double[] array = new double[max];
+        for (int i = 0; i < max; i += step) {
             array[i] = cpoly.calculate(i);
         }
         return array;

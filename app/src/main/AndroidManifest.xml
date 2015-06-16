@@ -20,6 +20,14 @@
             android:name=".PlotActivity"
             android:label="@string/title_activity_plot" >
         </activity>
+        <activity
+            android:name=".PreferencesActivity"
+            android:label="@string/title_activity_preferences" >
+        </activity>
+        <activity
+            android:name=".settings.SettigsActivity"
+            android:label="@string/title_activity_settigs" >
+        </activity>
     </application>
 
 </manifest>

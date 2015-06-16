@@ -1,8 +1,6 @@
 package com.vshkl.calcpoly.logic;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -11,15 +9,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Storage {
 
     static final String FILENAME = "settings";
-    static final String PREFERENCE_NAME = "Settings";
-    static final String[] COEFFICIENTS_NAMES = {"C0", "C1", "C2", "C3"};
     static final int SIZE = 4;
+
     static final String TAG_WRITE_ERR = "Error on write";
 
     /**
