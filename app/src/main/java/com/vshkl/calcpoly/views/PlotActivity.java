@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
 import com.vshkl.calcpoly.R;
 
 public class PlotActivity extends AppCompatActivity {
@@ -39,9 +43,17 @@ public class PlotActivity extends AppCompatActivity {
         }
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
+        series.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPointInterface) {
+                Toast.makeText(getApplicationContext(), "Point " + dataPointInterface, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMaxX(max);
         graph.getViewport().setMaxY(points[max-1]);
+        graph.getViewport().setScalable(true);
         graph.addSeries(series);
     }
 }
