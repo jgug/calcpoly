@@ -1,0 +1,110 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <!-- C0 -->
+
+    <TextView
+        android:id="@+id/tv_c0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignBaseline="@+id/te_c0"
+        android:text="@string/text_c0"
+        />
+
+    <EditText
+        android:id="@+id/te_c0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/tv_c0"
+        android:inputType="numberDecimal"
+        />
+
+    <!-- C1 -->
+
+    <TextView
+        android:id="@+id/tv_c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/te_c0"
+        android:layout_alignParentStart="true"
+        android:layout_alignBaseline="@+id/te_c1"
+        android:text="@string/text_c1"
+        />
+
+    <EditText
+        android:id="@+id/te_c1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/te_c0"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/tv_c1"
+        android:inputType="numberDecimal"
+        />
+
+    <!-- C2 -->
+
+    <TextView
+        android:id="@+id/tv_c2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/te_c1"
+        android:layout_alignParentStart="true"
+        android:layout_alignBaseline="@+id/te_c2"
+        android:text="@string/text_c2"
+        />
+
+    <EditText
+        android:id="@+id/te_c2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/te_c1"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/tv_c2"
+        android:inputType="numberDecimal"
+        />
+
+    <!-- C3 -->
+
+    <TextView
+        android:id="@+id/tv_c3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/te_c2"
+        android:layout_alignParentStart="true"
+        android:layout_alignBaseline="@+id/te_c3"
+        android:text="@string/text_c3"
+        />
+
+    <EditText
+        android:id="@+id/te_c3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/te_c2"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/tv_c3"
+        android:inputType="numberDecimal"
+        />
+
+    <!-- Button -->
+
+    <Button
+        android:id="@+id/buttonShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/button_show"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- App -->
+    <string name="app_name">CalcPoly</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Main view -->
+    <string name="text_c0">C0</string>
+    <string name="text_c1">C1</string>
+    <string name="text_c2">C2</string>
+    <string name="text_c3">C3</string>
+    <string name="button_show">SHOW</string>
+    <string name="title_activity_plot">PlotActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+
+</resources>
