@@ -12,87 +12,87 @@
     <!-- C0 -->
 
     <TextView
-        android:id="@+id/tv_c0"
+        android:id="@+id/textViewC0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignBaseline="@+id/te_c0"
+        android:layout_alignBaseline="@+id/editTextC0"
         android:text="@string/text_c0"
         />
 
     <EditText
-        android:id="@+id/te_c0"
+        android:id="@+id/editTextC0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/tv_c0"
+        android:layout_toEndOf="@+id/textViewC0"
         android:inputType="numberDecimal"
         />
 
     <!-- C1 -->
 
     <TextView
-        android:id="@+id/tv_c1"
+        android:id="@+id/textViewC1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/te_c0"
+        android:layout_below="@+id/editTextC0"
         android:layout_alignParentStart="true"
-        android:layout_alignBaseline="@+id/te_c1"
+        android:layout_alignBaseline="@+id/editTextC1"
         android:text="@string/text_c1"
         />
 
     <EditText
-        android:id="@+id/te_c1"
+        android:id="@+id/editTextC1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/te_c0"
+        android:layout_below="@id/editTextC0"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/tv_c1"
+        android:layout_toEndOf="@+id/textViewC1"
         android:inputType="numberDecimal"
         />
 
     <!-- C2 -->
 
     <TextView
-        android:id="@+id/tv_c2"
+        android:id="@+id/textViewC2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/te_c1"
+        android:layout_below="@+id/editTextC1"
         android:layout_alignParentStart="true"
-        android:layout_alignBaseline="@+id/te_c2"
+        android:layout_alignBaseline="@+id/editTextC2"
         android:text="@string/text_c2"
         />
 
     <EditText
-        android:id="@+id/te_c2"
+        android:id="@+id/editTextC2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/te_c1"
+        android:layout_below="@id/editTextC1"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/tv_c2"
+        android:layout_toEndOf="@+id/textViewC2"
         android:inputType="numberDecimal"
         />
 
     <!-- C3 -->
 
     <TextView
-        android:id="@+id/tv_c3"
+        android:id="@+id/textViewC3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/te_c2"
+        android:layout_below="@+id/editTextC2"
         android:layout_alignParentStart="true"
-        android:layout_alignBaseline="@+id/te_c3"
+        android:layout_alignBaseline="@+id/editTextC3"
         android:text="@string/text_c3"
         />
 
     <EditText
-        android:id="@+id/te_c3"
+        android:id="@+id/editTextC3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/te_c2"
+        android:layout_below="@id/editTextC2"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/tv_c3"
+        android:layout_toEndOf="@+id/textViewC3"
         android:inputType="numberDecimal"
         />
 
@@ -103,8 +103,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:text="@string/button_show"
-        />
+        android:layout_alignEnd="@+id/editTextC3"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
