@@ -1,6 +1,7 @@
 package com.vshkl.calcpoly.logic;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -10,11 +11,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Storage {
 
     static final String FILENAME = "settings";
+    static final String PREFERENCE_NAME = "Settings";
+    static final String[] COEFFICIENTS_NAMES = {"C0", "C1", "C2", "C3"};
     static final int SIZE = 4;
     static final String TAG_WRITE_ERR = "Error on write";
 
@@ -28,8 +32,12 @@ public class Storage {
 
         try {
             fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            fos.write(Arrays.toString(array).getBytes());
-            Log.v("STORAGE", Arrays.toString(array));
+            StringBuilder stringBuilder = new StringBuilder();
+            for (double val : array) {
+                stringBuilder.append(val).append(",");
+            }
+            fos.write(stringBuilder.toString().getBytes());
+            Log.v("STORAGE", stringBuilder.toString());
             fos.close();
         } catch (IOException e) {
             Log.e(TAG_WRITE_ERR, e.toString());
@@ -54,7 +62,7 @@ public class Storage {
         }
 
         double[] array = new double[SIZE];
-        String[] strArray = (str.substring(1, str.length()-1)).split(", ");
+        String[] strArray = str.split(",");
         Log.v("RESORE", strArray[0] + " " + strArray[1] + " " + strArray[2] + " " + strArray[3]);
         for (int i = 0; i < SIZE; i++) {
             array[i] = Double.parseDouble(strArray[i]);

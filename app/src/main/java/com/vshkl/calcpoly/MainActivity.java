@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
     int STEP = 1;
     int SIZE = 4;
 
-    double[] coefficients;
-
     EditText editTextC0;
     EditText editTextC1;
     EditText editTextC2;
@@ -42,17 +40,13 @@ public class MainActivity extends AppCompatActivity {
         editTextC3 = (EditText)findViewById(R.id.editTextC3);
         buttonShow = (Button)findViewById(R.id.buttonShow);
 
-        if (Storage.hasFile(getApplicationContext())) {
-            fillEditTexts(Storage.restoreData(getApplicationContext()));
-        }
-
         final CPolynomialCalculator cpoly = new CPolynomialCalculator();
 
         buttonShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                coefficients = getCoefficients();
+                double[] coefficients = getCoefficients();
 
                 Callback callback = new Callback(
                         coefficients[0], coefficients[1], coefficients[2], coefficients[3]);
@@ -88,10 +82,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (Storage.hasFile(getApplicationContext())) {
+            fillEditTexts(Storage.restoreData(getApplicationContext()));
+        }
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
 
-        Storage.storeData(getApplicationContext(), coefficients);
+        Storage.storeData(getApplicationContext(), getCoefficients());
     }
 
     /**
@@ -114,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
      * @return array of doubles
      */
     public double[] getCoefficients() {
-        coefficients = new double[SIZE];
+        double[] coefficients = new double[SIZE];
         coefficients[0] = Double.parseDouble(editTextC0.getText().toString());
         coefficients[1] = Double.parseDouble(editTextC1.getText().toString());
         coefficients[2] = Double.parseDouble(editTextC2.getText().toString());
