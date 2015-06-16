@@ -4,7 +4,7 @@
 
     <EditTextPreference
         android:defaultValue="@string/pref_max_default"
-        android:inputType="numberDecimal"
+        android:inputType="number"
         android:key="@string/pref_max_key"
         android:selectAllOnFocus="true"
         android:summary="@string/pref_max_description"

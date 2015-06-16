@@ -1,16 +1,18 @@
-package com.vshkl.calcpoly;
+package com.vshkl.calcpoly.views;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.vshkl.calcpoly.R;
 import com.vshkl.calcpoly.logic.Callback;
 import com.vshkl.calcpoly.logic.Storage;
 import com.vshkl.calcpoly.settings.SettigsActivity;
@@ -18,8 +20,6 @@ import com.vshkl.core.CPolynomialCalculator;
 
 public class MainActivity extends AppCompatActivity {
 
-    int MAXVALUE = 100;
-    int STEP = 1;
     int SIZE = 4;
 
     EditText editTextC0;
@@ -110,11 +110,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int max = Integer.parseInt(preferences.getString(
                 getString(R.string.pref_max_key), getString(R.string.pref_max_default)));
-        int step = Integer.parseInt(preferences.getString(
+        double step = Double.parseDouble(preferences.getString(
                 getString(R.string.pref_step_key), getString(R.string.pref_step_default)));
-        double[] array = new double[max];
-        for (int i = 0; i < max; i += step) {
-            array[i] = cpoly.calculate(i);
+        int size = (int)(max/step);
+        Log.v("SIZE", String.valueOf(size));
+        double[] array = new double[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = cpoly.calculate(i*step);
         }
         return array;
     }
