@@ -1,15 +1,11 @@
 package com.vshkl.calcpoly.views;
 
-import android.app.ProgressDialog;
 import android.content.SharedPreferences;
-import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
@@ -42,16 +38,11 @@ public class PlotActivity extends AppCompatActivity {
     /**
      * Method for calculating point for plot
      * @param cpoly CPolynomialCalculator object
+     * @param size size of resulting array
+     * @param step calculation step
      * @return double[]
      */
-    public double[] calculatePoints(CPolynomialCalculator cpoly) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int max = Integer.parseInt(preferences.getString(
-                getString(R.string.pref_max_key), getString(R.string.pref_max_default)));
-        double step = Double.parseDouble(preferences.getString(
-                getString(R.string.pref_step_key), getString(R.string.pref_step_default)));
-        int size = (int)(max/step);
-        Log.v("SIZE", String.valueOf(size));
+    public double[] calculatePoints(CPolynomialCalculator cpoly, int size, double step) {
         double[] array = new double[size];
         for (int i = 0; i < size; i++) {
             array[i] = cpoly.calculate(i*step);
@@ -60,29 +51,30 @@ public class PlotActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Class extending AsyncTask for executing points calculatins not in UI thread,
+     */
     private class CalculatePoints extends AsyncTask<double[], Integer, double[]> {
+        private final SharedPreferences preferences =
+                PreferenceManager.getDefaultSharedPreferences(PlotActivity.this);
+        private final int max = Integer.parseInt(preferences.getString(
+                getString(R.string.pref_max_key), getString(R.string.pref_max_default)));
+        private final double step = Double.parseDouble(preferences.getString(
+                getString(R.string.pref_step_key), getString(R.string.pref_step_default)));
+        private final int size = (int)(max/step);
 
         @Override
         protected double[] doInBackground(double[]... params) {
             Callback callback = new Callback(params[0][0], params[0][1], params[0][1], params[0][1]);
             CPolynomialCalculator cpoly = new CPolynomialCalculator();
             cpoly.setCallback(callback);
-            double[] points = calculatePoints(cpoly);
+            double[] points = calculatePoints(cpoly, size, step);
 
             return points;
         }
 
         @Override
         protected void onPostExecute(double[] points) {
-            SharedPreferences preferences =
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            int max = Integer.parseInt(preferences.getString(
-                    getString(R.string.pref_max_key), getString(R.string.pref_max_default)));
-            double step = Double.parseDouble(preferences.getString(
-                    getString(R.string.pref_step_key), getString(R.string.pref_step_default)));
-            int size = (int)(max/step);
-
             GraphView graph = (GraphView) findViewById(R.id.graph);
             DataPoint[] dataPoints = new DataPoint[size];
             for (int i = 0; i < size; i++) {
