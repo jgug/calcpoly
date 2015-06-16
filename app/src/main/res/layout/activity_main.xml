@@ -18,6 +18,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignBaseline="@+id/editTextC0"
         android:text="@string/text_c0"
+        android:textSize="@dimen/abc_text_size_display_1_material"
         />
 
     <EditText
@@ -27,6 +28,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textViewC0"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/abc_text_size_medium_material"
         android:inputType="numberDecimal"
         />
 
@@ -40,6 +43,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignBaseline="@+id/editTextC1"
         android:text="@string/text_c1"
+        android:textSize="@dimen/abc_text_size_display_1_material"
         />
 
     <EditText
@@ -49,6 +53,7 @@
         android:layout_below="@id/editTextC0"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textViewC1"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:inputType="numberDecimal"
         />
 
@@ -62,6 +67,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignBaseline="@+id/editTextC2"
         android:text="@string/text_c2"
+        android:textSize="@dimen/abc_text_size_display_1_material"
         />
 
     <EditText
@@ -71,6 +77,7 @@
         android:layout_below="@id/editTextC1"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textViewC2"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:inputType="numberDecimal"
         />
 
@@ -84,6 +91,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignBaseline="@+id/editTextC3"
         android:text="@string/text_c3"
+        android:textSize="@dimen/abc_text_size_display_1_material"
         />
 
     <EditText
@@ -93,6 +101,7 @@
         android:layout_below="@id/editTextC2"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textViewC3"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:inputType="numberDecimal"
         />
 
@@ -105,6 +114,7 @@
         android:layout_alignParentBottom="true"
         android:text="@string/button_show"
         android:layout_alignEnd="@+id/editTextC3"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        />
 
 </RelativeLayout>
