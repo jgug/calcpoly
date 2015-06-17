@@ -1,5 +1,6 @@
 package com.vshkl.calcpoly.views;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,10 +8,11 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Range;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.Viewport;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -49,7 +51,6 @@ public class PlotActivity extends AppCompatActivity {
         for (int i = 0; i <= size; i++) {
             array[i] = cpoly.calculate(i*step);
         }
-        Log.v("SIZE", String.valueOf(size));
         return array;
     }
 
@@ -66,6 +67,8 @@ public class PlotActivity extends AppCompatActivity {
         private final double step = Double.parseDouble(preferences.getString(
                 getString(R.string.pref_step_key), getString(R.string.pref_step_default)));
         private final int size = (int)(max/step);
+
+        private final int X_RANGE = 4;
 
         @Override
         protected double[] doInBackground(double[]... params) {
@@ -89,8 +92,12 @@ public class PlotActivity extends AppCompatActivity {
             series.setOnDataPointTapListener(new OnDataPointTapListener() {
                 @Override
                 public void onTap(Series series, DataPointInterface dataPointInterface) {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("x = ").append((int) (dataPointInterface.getX() * step))
+                            .append("  P(x) = ").append((int) dataPointInterface.getY());
+
                     Toast.makeText(getApplicationContext(),
-                            "Point " + dataPointInterface, Toast.LENGTH_SHORT
+                            stringBuilder.toString(), Toast.LENGTH_SHORT
                     ).show();
                 }
             });
@@ -101,8 +108,8 @@ public class PlotActivity extends AppCompatActivity {
             graph.getViewport().setMaxX(size);
             graph.getViewport().setMaxY(points[size]);
             graph.getViewport().setScalable(true);
+            graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
             graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
-
         }
     }
 }
