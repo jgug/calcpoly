@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.vshkl.calcpoly.R;
-import com.vshkl.calcpoly.logic.Callback;
 import com.vshkl.calcpoly.logic.Storage;
 import com.vshkl.calcpoly.settings.SettigsActivity;
 import com.vshkl.core.CPolynomialCalculator;
