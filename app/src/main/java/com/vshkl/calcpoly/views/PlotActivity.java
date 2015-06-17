@@ -1,18 +1,14 @@
 package com.vshkl.calcpoly.views;
 
-import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.util.Range;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -23,6 +19,8 @@ import com.vshkl.calcpoly.logic.Callback;
 import com.vshkl.core.CPolynomialCalculator;
 
 public class PlotActivity extends AppCompatActivity {
+
+    private final static int LINE_THICKNESS = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,16 +66,13 @@ public class PlotActivity extends AppCompatActivity {
                 getString(R.string.pref_step_key), getString(R.string.pref_step_default)));
         private final int size = (int)(max/step);
 
-        private final int X_RANGE = 4;
-
         @Override
         protected double[] doInBackground(double[]... params) {
             Callback callback = new Callback(params[0][0], params[0][1], params[0][1], params[0][1]);
             CPolynomialCalculator cpoly = new CPolynomialCalculator();
             cpoly.setCallback(callback);
-            double[] points = calculatePoints(cpoly, size, step);
 
-            return points;
+            return calculatePoints(cpoly, size, step);
         }
 
         @Override
@@ -102,12 +97,17 @@ public class PlotActivity extends AppCompatActivity {
                 }
             });
 
+            series.setColor(getResources().getColor(R.color.accent_material_light));
+            series.setThickness(LINE_THICKNESS);
+
             graph.addSeries(series);
             graph.getViewport().setXAxisBoundsManual(true);
             graph.getViewport().setYAxisBoundsManual(true);
             graph.getViewport().setMaxX(size);
             graph.getViewport().setMaxY(points[size]);
             graph.getViewport().setScalable(true);
+            graph.getGridLabelRenderer()
+                    .setGridColor(getResources().getColor(R.color.primary_material_dark));
             graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
             graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
         }
