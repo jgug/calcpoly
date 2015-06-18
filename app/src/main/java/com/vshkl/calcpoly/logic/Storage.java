@@ -1,7 +1,6 @@
 package com.vshkl.calcpoly.logic;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -54,7 +53,7 @@ public class Storage {
         }
 
         double[] array = new double[SIZE];
-        String[] strArray = str.split(",");
+        String[] strArray = str != null ? str.split(",") : new String[]{"0", "0", "0", "0"};
         for (int i = 0; i < SIZE; i++) {
             array[i] = Double.parseDouble(strArray[i]);
         }
