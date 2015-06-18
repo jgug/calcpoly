@@ -1,9 +1,9 @@
 package com.vshkl.calcpoly.logic;
 
-import com.vshkl.core.CCallback;
+import com.vshkl.core.CPolynomialCalculatorCallback;
 import com.vshkl.core.SWIGTYPE_p_double;
 
-public class Callback extends CCallback {
+public class Callback extends CPolynomialCalculatorCallback {
 
     private double c0;
     private double c1;

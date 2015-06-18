@@ -12,19 +12,15 @@
 bin/
 gen/
 out/
-build/*
+build/
 
 # IDEA/Android Studio project files, because
 # the project can be imported from settings.gradle
 .idea
 *.iml
 
-# Local IDEA workspace
-.idea/workspace.xml
-
 # Gradle cache
 .gradle
 
 # Properties files
 *.properties
-

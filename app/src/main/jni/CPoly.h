@@ -1,8 +1,8 @@
-class CCallback
+class CPolynomialCalculatorCallback
 {
     public:
-        CCallback() {}
-        virtual ~CCallback() {}
+        CPolynomialCalculatorCallback() {}
+        virtual ~CPolynomialCalculatorCallback() {}
         virtual void getCoefficients(double* c0, double* c1, double* c2, double* c3)=0;
         void setValue(double& ref, double val) {
             ref = val;
@@ -13,7 +13,7 @@ class CPolynomialCalculator
 {
     public:
 
-        void setCallback(CCallback* pCallback)
+        void setCallback(CPolynomialCalculatorCallback* pCallback)
         {
             mCallback = pCallback;
         }
@@ -31,5 +31,5 @@ class CPolynomialCalculator
         }
 
     protected:
-        CCallback* mCallback;
+        CPolynomialCalculatorCallback* mCallback;
 };
