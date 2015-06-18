@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.vshkl.calcpoly.R;
 import com.vshkl.calcpoly.logic.Storage;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final static int SIZE = 4;
     private final static String EXTRA_NAME = "coefficients";
+    private final static String MESSAGE_EMPTY = "Please, fill in all fields";
 
     static {
         System.loadLibrary("CPoly");
@@ -30,14 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.buttonShow)
     public void show() {
-        double[] coefficients = getCoefficients();
+        if (isAllFilledIn()) {
+            double[] coefficients = getCoefficients();
 
-        Bundle bundle = new Bundle();
-        bundle.putDoubleArray(EXTRA_NAME, coefficients);
+            Bundle bundle = new Bundle();
+            bundle.putDoubleArray(EXTRA_NAME, coefficients);
 
-        Intent intent = new Intent(getApplicationContext(), PlotActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), PlotActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, MESSAGE_EMPTY, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -106,5 +112,18 @@ public class MainActivity extends AppCompatActivity {
             editText.setText(String.valueOf(array[i]));
             i++;
         }
+    }
+
+    /**
+     * Check if every EditText filled in
+     * @return boolean. True if all fields are filled in. False if not
+     */
+    public boolean isAllFilledIn() {
+        for (EditText editText : editTexts) {
+            if (editText.getText().toString().length() == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
