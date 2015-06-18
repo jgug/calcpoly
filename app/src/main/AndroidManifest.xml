@@ -22,7 +22,7 @@
             android:label="@string/title_activity_plot" >
         </activity>
         <activity
-            android:name=".settings.SettigsActivity"
+            android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settigs" >
         </activity>
     </application>

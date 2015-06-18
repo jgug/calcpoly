@@ -68,7 +68,7 @@ public class PlotActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         points = savedInstanceState.getDoubleArray(BUNDLE_ARRAY);
-        plot(points, size, step);
+        plot(points);
     }
 
     /**
@@ -86,7 +86,11 @@ public class PlotActivity extends AppCompatActivity {
         return array;
     }
 
-    public void plot(double[] points, int size, final double step) {
+    /**
+     * Method for plotting graph
+     * @param points array of double containing points for plotting
+     */
+    public void plot(double[] points) {
         DataPoint[] dataPoints = new DataPoint[size+1];
         for (int i = 0; i <= size; i++) {
             dataPoints[i] = new DataPoint(i, points[i]);
@@ -138,7 +142,7 @@ public class PlotActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(double[] points) {
-            plot(points, size, step);
+            plot(points);
         }
     }
 }

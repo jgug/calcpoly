@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.vshkl.calcpoly.R;
 import com.vshkl.calcpoly.logic.Storage;
-import com.vshkl.calcpoly.settings.SettigsActivity;
+import com.vshkl.calcpoly.settings.SettingsActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectViews;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.buttonShow)
     public void show() {
         if (isAllFilledIn()) {
-            if (isAllDigins()) {
+            if (isAllDigits()) {
                 double[] coefficients = getCoefficients();
 
                 Bundle bundle = new Bundle();
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, SettigsActivity.class);
+            Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
         }
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
      * Check if every EditText contains numbers only, but not standalone '.' symbol
      * @return boolean. False if there is standalone '.' symbol
      */
-    public boolean isAllDigins() {
+    public boolean isAllDigits() {
         for (EditText editText : editTexts) {
             if (editText.getText().toString().equals(".")) {
                 return false;
