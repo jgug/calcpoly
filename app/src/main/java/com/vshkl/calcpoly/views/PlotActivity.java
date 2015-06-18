@@ -18,15 +18,21 @@ import com.vshkl.calcpoly.R;
 import com.vshkl.calcpoly.logic.Callback;
 import com.vshkl.core.CPolynomialCalculator;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class PlotActivity extends AppCompatActivity {
 
     private final static int LINE_THICKNESS = 8;
     private final static String EXTRA_NAME = "coefficients";
 
+    @InjectView(R.id.graph) GraphView graph;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plot);
+        ButterKnife.inject(this);
 
         Bundle bundle = this.getIntent().getExtras();
         double[] coefficients = bundle.getDoubleArray(EXTRA_NAME);
@@ -54,7 +60,7 @@ public class PlotActivity extends AppCompatActivity {
      * Class extending AsyncTask for executing points calculatins not in UI thread,
      * An {@link AsyncTask} subclass
      */
-    private class CalculatePoints extends AsyncTask<double[], Integer, double[]> {
+    private class CalculatePoints extends AsyncTask<double[], Void, LineGraphSeries> {
         private final SharedPreferences preferences =
                 PreferenceManager.getDefaultSharedPreferences(PlotActivity.this);
         private final int max = Integer.parseInt(preferences.getString(
@@ -64,24 +70,28 @@ public class PlotActivity extends AppCompatActivity {
         private final int size = (int)(max/step);
 
         @Override
-        protected double[] doInBackground(double[]... params) {
+        protected LineGraphSeries doInBackground(double[]... params) {
             Callback callback =
                     new Callback(params[0][0], params[0][1], params[0][2], params[0][3]);
             CPolynomialCalculator cpoly = new CPolynomialCalculator();
             cpoly.setCallback(callback);
 
-            return calculatePoints(cpoly, size, step);
-        }
+            double[] points = calculatePoints(cpoly, size, step);
 
-        @Override
-        protected void onPostExecute(double[] points) {
-            GraphView graph = (GraphView) findViewById(R.id.graph);
             DataPoint[] dataPoints = new DataPoint[size+1];
             for (int i = 0; i <= size; i++) {
                 dataPoints[i] = new DataPoint(i, points[i]);
             }
 
             LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+            series.setColor(getResources().getColor(R.color.accent_material_light));
+            series.setThickness(LINE_THICKNESS);
+
+            return series;
+        }
+
+        @Override
+        protected void onPostExecute(LineGraphSeries series) {
             series.setOnDataPointTapListener(new OnDataPointTapListener() {
                 @Override
                 public void onTap(Series series, DataPointInterface dataPointInterface) {
@@ -95,18 +105,15 @@ public class PlotActivity extends AppCompatActivity {
                 }
             });
 
-            series.setColor(getResources().getColor(R.color.accent_material_light));
-            series.setThickness(LINE_THICKNESS);
-
-            graph.getViewport().setXAxisBoundsManual(true);
-            graph.getViewport().setYAxisBoundsManual(true);
-            graph.getViewport().setMaxX(size);
-            graph.getViewport().setMaxY(points[size]);
-            graph.getViewport().setScalable(true);
             graph.getGridLabelRenderer()
                     .setGridColor(getResources().getColor(R.color.primary_material_dark));
             graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
             graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
+            graph.getViewport().setXAxisBoundsManual(true);
+            graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMaxX(size);
+            graph.getViewport().setMaxY(series.getHighestValueY());
+            graph.getViewport().setScalable(true);
             graph.addSeries(series);
         }
     }
