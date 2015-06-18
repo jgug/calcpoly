@@ -16,7 +16,6 @@
 ![Plot screen](http://i.imgur.com/Cs56EK2m.png "Plot screen")
 ![Plot screen point](http://i.imgur.com/dIG2GTlm.png "Plot screen point")
 
-
 ### Used third-party libraries ###
 
 * [Butter Knife](https://github.com/JakeWharton/butterknife) for injections
@@ -26,3 +25,4 @@
 
 * To build *.so files, run `./gradlew runSwig` in Terminal
 * Latest [SWIG](http://www.swig.org/) and [NDK](https://developer.android.com/ndk/downloads/index.html) should be installed
+* Working app. [gif](http://i.imgur.com/j9iwulF.gif)
