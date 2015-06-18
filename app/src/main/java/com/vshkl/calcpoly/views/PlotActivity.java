@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -14,6 +13,7 @@ import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
+
 import com.vshkl.calcpoly.R;
 import com.vshkl.calcpoly.logic.Callback;
 import com.vshkl.core.CPolynomialCalculator;
@@ -21,17 +21,15 @@ import com.vshkl.core.CPolynomialCalculator;
 public class PlotActivity extends AppCompatActivity {
 
     private final static int LINE_THICKNESS = 8;
+    private final static String EXTRA_NAME = "coefficients";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plot);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-
         Bundle bundle = this.getIntent().getExtras();
-        double[] coefficients = bundle.getDoubleArray("coefficients");
+        double[] coefficients = bundle.getDoubleArray(EXTRA_NAME);
 
         CalculatePoints calculatePoints = new CalculatePoints();
         calculatePoints.execute(coefficients);
@@ -52,7 +50,6 @@ public class PlotActivity extends AppCompatActivity {
         return array;
     }
 
-
     /**
      * Class extending AsyncTask for executing points calculatins not in UI thread,
      * An {@link AsyncTask} subclass
@@ -68,7 +65,8 @@ public class PlotActivity extends AppCompatActivity {
 
         @Override
         protected double[] doInBackground(double[]... params) {
-            Callback callback = new Callback(params[0][0], params[0][1], params[0][1], params[0][1]);
+            Callback callback =
+                    new Callback(params[0][0], params[0][1], params[0][1], params[0][1]);
             CPolynomialCalculator cpoly = new CPolynomialCalculator();
             cpoly.setCallback(callback);
 
