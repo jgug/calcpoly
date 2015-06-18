@@ -13,7 +13,6 @@ import com.vshkl.calcpoly.logic.Storage;
 import com.vshkl.calcpoly.settings.SettigsActivity;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
 
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Fill edit texts fields with values from storage if file exists
+     * Fill with values from storage
      * @param array an array of values to fill
      */
     public void fillEditTexts(double[] array) {

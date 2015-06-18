@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
@@ -46,6 +47,7 @@ public class PlotActivity extends AppCompatActivity {
         double[] array = new double[size+1];
         for (int i = 0; i <= size; i++) {
             array[i] = cpoly.calculate(i*step);
+            Log.v("VAL= ", String.valueOf(cpoly.calculate(i * step)));
         }
         return array;
     }
@@ -66,7 +68,7 @@ public class PlotActivity extends AppCompatActivity {
         @Override
         protected double[] doInBackground(double[]... params) {
             Callback callback =
-                    new Callback(params[0][0], params[0][1], params[0][1], params[0][1]);
+                    new Callback(params[0][0], params[0][1], params[0][2], params[0][3]);
             CPolynomialCalculator cpoly = new CPolynomialCalculator();
             cpoly.setCallback(callback);
 
@@ -98,7 +100,6 @@ public class PlotActivity extends AppCompatActivity {
             series.setColor(getResources().getColor(R.color.accent_material_light));
             series.setThickness(LINE_THICKNESS);
 
-            graph.addSeries(series);
             graph.getViewport().setXAxisBoundsManual(true);
             graph.getViewport().setYAxisBoundsManual(true);
             graph.getViewport().setMaxX(size);
@@ -108,6 +109,7 @@ public class PlotActivity extends AppCompatActivity {
                     .setGridColor(getResources().getColor(R.color.primary_material_dark));
             graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
             graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
+            graph.addSeries(series);
         }
     }
 }
