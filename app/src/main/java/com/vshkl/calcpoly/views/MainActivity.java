@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private final static int SIZE = 4;
     private final static String EXTRA_NAME = "coefficients";
     private final static String MESSAGE_EMPTY = "Please, fill in all fields";
+    private final static String MESSAGE_DOT = "Only numbers allowed";
 
     static {
         System.loadLibrary("CPoly");
@@ -32,14 +33,18 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.buttonShow)
     public void show() {
         if (isAllFilledIn()) {
-            double[] coefficients = getCoefficients();
+            if (isAllDigins()) {
+                double[] coefficients = getCoefficients();
 
-            Bundle bundle = new Bundle();
-            bundle.putDoubleArray(EXTRA_NAME, coefficients);
+                Bundle bundle = new Bundle();
+                bundle.putDoubleArray(EXTRA_NAME, coefficients);
 
-            Intent intent = new Intent(getApplicationContext(), PlotActivity.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), PlotActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, MESSAGE_DOT, Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(this, MESSAGE_EMPTY, Toast.LENGTH_SHORT).show();
         }
@@ -95,7 +100,11 @@ public class MainActivity extends AppCompatActivity {
         double[] coefficients = new double[SIZE];
         int i = 0;
         for (EditText editText : editTexts) {
-            coefficients[i] = Double.parseDouble(editText.getText().toString());
+            if (editText.getText().toString().equals("") || editText.getText().toString().equals(".")) {
+                coefficients[i] = 0;
+            } else {
+                coefficients[i] = Double.parseDouble(editText.getText().toString());
+            }
             i++;
         }
         return coefficients;
@@ -120,6 +129,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean isAllFilledIn() {
         for (EditText editText : editTexts) {
             if (editText.getText().toString().length() == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Check if every EditText contains numbers only, but not standalone '.' symbol
+     * @return boolean. False if there is standalone '.' symbol
+     */
+    public boolean isAllDigins() {
+        for (EditText editText : editTexts) {
+            if (editText.getText().toString().equals(".")) {
                 return false;
             }
         }
