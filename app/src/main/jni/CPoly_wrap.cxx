@@ -447,15 +447,15 @@ static double doublep_value(double *obj) {
 
 #include "CPoly_wrap.h"
 
-SwigDirector_CCallback::SwigDirector_CCallback(JNIEnv *jenv) : CCallback(), Swig::Director(jenv) {
+SwigDirector_CPolynomialCalculatorCallback::SwigDirector_CPolynomialCalculatorCallback(JNIEnv *jenv) : CPolynomialCalculatorCallback(), Swig::Director(jenv) {
 }
 
-SwigDirector_CCallback::~SwigDirector_CCallback() {
+SwigDirector_CPolynomialCalculatorCallback::~SwigDirector_CPolynomialCalculatorCallback() {
   swig_disconnect_director_self("swigDirectorDisconnect");
 }
 
 
-void SwigDirector_CCallback::getCoefficients(double *c0, double *c1, double *c2, double *c3) {
+void SwigDirector_CPolynomialCalculatorCallback::getCoefficients(double *c0, double *c1, double *c2, double *c3) {
   JNIEnvWrapper swigjnienv(this) ;
   JNIEnv * jenv = swigjnienv.getJNIEnv() ;
   jobject swigjobj = (jobject) NULL ;
@@ -465,7 +465,7 @@ void SwigDirector_CCallback::getCoefficients(double *c0, double *c1, double *c2,
   jlong jc3 = 0 ;
   
   if (!swig_override[0]) {
-    SWIG_JavaThrowException(JNIEnvWrapper(this).getJNIEnv(), SWIG_JavaDirectorPureVirtual, "Attempted to invoke pure virtual method CCallback::getCoefficients.");
+    SWIG_JavaThrowException(JNIEnvWrapper(this).getJNIEnv(), SWIG_JavaDirectorPureVirtual, "Attempted to invoke pure virtual method CPolynomialCalculatorCallback::getCoefficients.");
     return;
   }
   swigjobj = swig_get_self(jenv);
@@ -482,7 +482,7 @@ void SwigDirector_CCallback::getCoefficients(double *c0, double *c1, double *c2,
   if (swigjobj) jenv->DeleteLocalRef(swigjobj);
 }
 
-void SwigDirector_CCallback::swig_connect_director(JNIEnv *jenv, jobject jself, jclass jcls, bool swig_mem_own, bool weak_global) {
+void SwigDirector_CPolynomialCalculatorCallback::swig_connect_director(JNIEnv *jenv, jobject jself, jclass jcls, bool swig_mem_own, bool weak_global) {
   static struct {
     const char *mname;
     const char *mdesc;
@@ -497,7 +497,7 @@ void SwigDirector_CCallback::swig_connect_director(JNIEnv *jenv, jobject jself, 
   
   if (swig_set_self(jenv, jself, swig_mem_own, weak_global)) {
     if (!baseclass) {
-      baseclass = jenv->FindClass("com/vshkl/core/CCallback");
+      baseclass = jenv->FindClass("com/vshkl/core/CPolynomialCalculatorCallback");
       if (!baseclass) return;
       baseclass = (jclass) jenv->NewGlobalRef(baseclass);
     }
@@ -523,30 +523,30 @@ void SwigDirector_CCallback::swig_connect_director(JNIEnv *jenv, jobject jself, 
 extern "C" {
 #endif
 
-SWIGEXPORT jlong JNICALL Java_com_vshkl_core_CPolyWrapperJNI_new_1CCallback(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_com_vshkl_core_CPolyWrapperJNI_new_1CPolynomialCalculatorCallback(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  CCallback *result = 0 ;
+  CPolynomialCalculatorCallback *result = 0 ;
   
   (void)jenv;
   (void)jcls;
-  result = (CCallback *)new SwigDirector_CCallback(jenv);
-  *(CCallback **)&jresult = result; 
+  result = (CPolynomialCalculatorCallback *)new SwigDirector_CPolynomialCalculatorCallback(jenv);
+  *(CPolynomialCalculatorCallback **)&jresult = result; 
   return jresult;
 }
 
 
-SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_delete_1CCallback(JNIEnv *jenv, jclass jcls, jlong jarg1) {
-  CCallback *arg1 = (CCallback *) 0 ;
+SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_delete_1CPolynomialCalculatorCallback(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  CPolynomialCalculatorCallback *arg1 = (CPolynomialCalculatorCallback *) 0 ;
   
   (void)jenv;
   (void)jcls;
-  arg1 = *(CCallback **)&jarg1; 
+  arg1 = *(CPolynomialCalculatorCallback **)&jarg1; 
   delete arg1;
 }
 
 
-SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CCallback_1getCoefficients(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4, jlong jarg5) {
-  CCallback *arg1 = (CCallback *) 0 ;
+SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CPolynomialCalculatorCallback_1getCoefficients(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4, jlong jarg5) {
+  CPolynomialCalculatorCallback *arg1 = (CPolynomialCalculatorCallback *) 0 ;
   double *arg2 = (double *) 0 ;
   double *arg3 = (double *) 0 ;
   double *arg4 = (double *) 0 ;
@@ -555,7 +555,7 @@ SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CCallback_1getCoeffi
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(CCallback **)&jarg1; 
+  arg1 = *(CPolynomialCalculatorCallback **)&jarg1; 
   arg2 = *(double **)&jarg2; 
   arg3 = *(double **)&jarg3; 
   arg4 = *(double **)&jarg4; 
@@ -564,15 +564,15 @@ SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CCallback_1getCoeffi
 }
 
 
-SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CCallback_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jdouble jarg3) {
-  CCallback *arg1 = (CCallback *) 0 ;
+SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CPolynomialCalculatorCallback_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jdouble jarg3) {
+  CPolynomialCalculatorCallback *arg1 = (CPolynomialCalculatorCallback *) 0 ;
   double *arg2 = 0 ;
   double arg3 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(CCallback **)&jarg1; 
+  arg1 = *(CPolynomialCalculatorCallback **)&jarg1; 
   arg2 = *(double **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "double & reference is null");
@@ -583,19 +583,19 @@ SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CCallback_1setValue(
 }
 
 
-SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CCallback_1director_1connect(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jswig_mem_own, jboolean jweak_global) {
-  CCallback *obj = *((CCallback **)&objarg);
+SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CPolynomialCalculatorCallback_1director_1connect(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jswig_mem_own, jboolean jweak_global) {
+  CPolynomialCalculatorCallback *obj = *((CPolynomialCalculatorCallback **)&objarg);
   (void)jcls;
-  SwigDirector_CCallback *director = dynamic_cast<SwigDirector_CCallback *>(obj);
+  SwigDirector_CPolynomialCalculatorCallback *director = dynamic_cast<SwigDirector_CPolynomialCalculatorCallback *>(obj);
   if (director) {
     director->swig_connect_director(jenv, jself, jenv->GetObjectClass(jself), (jswig_mem_own == JNI_TRUE), (jweak_global == JNI_TRUE));
   }
 }
 
 
-SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CCallback_1change_1ownership(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jtake_or_release) {
-  CCallback *obj = *((CCallback **)&objarg);
-  SwigDirector_CCallback *director = dynamic_cast<SwigDirector_CCallback *>(obj);
+SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CPolynomialCalculatorCallback_1change_1ownership(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jtake_or_release) {
+  CPolynomialCalculatorCallback *obj = *((CPolynomialCalculatorCallback **)&objarg);
+  SwigDirector_CPolynomialCalculatorCallback *director = dynamic_cast<SwigDirector_CPolynomialCalculatorCallback *>(obj);
   (void)jcls;
   if (director) {
     director->swig_java_change_ownership(jenv, jself, jtake_or_release ? true : false);
@@ -605,14 +605,14 @@ SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CCallback_1change_1o
 
 SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_CPolynomialCalculator_1setCallback(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   CPolynomialCalculator *arg1 = (CPolynomialCalculator *) 0 ;
-  CCallback *arg2 = (CCallback *) 0 ;
+  CPolynomialCalculatorCallback *arg2 = (CPolynomialCalculatorCallback *) 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   (void)jarg2_;
   arg1 = *(CPolynomialCalculator **)&jarg1; 
-  arg2 = *(CCallback **)&jarg2; 
+  arg2 = *(CPolynomialCalculatorCallback **)&jarg2; 
   (arg1)->setCallback(arg2);
 }
 
@@ -726,7 +726,7 @@ SWIGEXPORT void JNICALL Java_com_vshkl_core_CPolyWrapperJNI_swig_1module_1init(J
     const char *signature;
   } methods[1] = {
     {
-      "SwigDirector_CCallback_getCoefficients", "(Lcom/vshkl/core/CCallback;JJJJ)V" 
+      "SwigDirector_CPolynomialCalculatorCallback_getCoefficients", "(Lcom/vshkl/core/CPolynomialCalculatorCallback;JJJJ)V" 
     }
   };
   Swig::jclass_CPolyWrapperJNI = (jclass) jenv->NewGlobalRef(jcls);

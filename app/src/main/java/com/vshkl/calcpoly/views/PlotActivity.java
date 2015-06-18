@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
@@ -47,7 +46,6 @@ public class PlotActivity extends AppCompatActivity {
         double[] array = new double[size+1];
         for (int i = 0; i <= size; i++) {
             array[i] = cpoly.calculate(i*step);
-            Log.v("VAL= ", String.valueOf(cpoly.calculate(i * step)));
         }
         return array;
     }

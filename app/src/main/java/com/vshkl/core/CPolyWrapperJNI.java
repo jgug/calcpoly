@@ -9,13 +9,13 @@
 package com.vshkl.core;
 
 public class CPolyWrapperJNI {
-  public final static native long new_CCallback();
-  public final static native void delete_CCallback(long jarg1);
-  public final static native void CCallback_getCoefficients(long jarg1, CCallback jarg1_, long jarg2, long jarg3, long jarg4, long jarg5);
-  public final static native void CCallback_setValue(long jarg1, CCallback jarg1_, long jarg2, double jarg3);
-  public final static native void CCallback_director_connect(CCallback obj, long cptr, boolean mem_own, boolean weak_global);
-  public final static native void CCallback_change_ownership(CCallback obj, long cptr, boolean take_or_release);
-  public final static native void CPolynomialCalculator_setCallback(long jarg1, CPolynomialCalculator jarg1_, long jarg2, CCallback jarg2_);
+  public final static native long new_CPolynomialCalculatorCallback();
+  public final static native void delete_CPolynomialCalculatorCallback(long jarg1);
+  public final static native void CPolynomialCalculatorCallback_getCoefficients(long jarg1, CPolynomialCalculatorCallback jarg1_, long jarg2, long jarg3, long jarg4, long jarg5);
+  public final static native void CPolynomialCalculatorCallback_setValue(long jarg1, CPolynomialCalculatorCallback jarg1_, long jarg2, double jarg3);
+  public final static native void CPolynomialCalculatorCallback_director_connect(CPolynomialCalculatorCallback obj, long cptr, boolean mem_own, boolean weak_global);
+  public final static native void CPolynomialCalculatorCallback_change_ownership(CPolynomialCalculatorCallback obj, long cptr, boolean take_or_release);
+  public final static native void CPolynomialCalculator_setCallback(long jarg1, CPolynomialCalculator jarg1_, long jarg2, CPolynomialCalculatorCallback jarg2_);
   public final static native double CPolynomialCalculator_calculate(long jarg1, CPolynomialCalculator jarg1_, double jarg2);
   public final static native long new_CPolynomialCalculator();
   public final static native void delete_CPolynomialCalculator(long jarg1);
@@ -25,7 +25,7 @@ public class CPolyWrapperJNI {
   public final static native void doublep_assign(long jarg1, double jarg2);
   public final static native double doublep_value(long jarg1);
 
-  public static void SwigDirector_CCallback_getCoefficients(CCallback self, long c0, long c1, long c2, long c3) {
+  public static void SwigDirector_CPolynomialCalculatorCallback_getCoefficients(CPolynomialCalculatorCallback self, long c0, long c1, long c2, long c3) {
     self.getCoefficients((c0 == 0) ? null : new SWIGTYPE_p_double(c0, false), (c1 == 0) ? null : new SWIGTYPE_p_double(c1, false), (c2 == 0) ? null : new SWIGTYPE_p_double(c2, false), (c3 == 0) ? null : new SWIGTYPE_p_double(c3, false));
   }
 

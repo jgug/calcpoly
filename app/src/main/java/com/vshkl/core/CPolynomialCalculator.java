@@ -35,8 +35,8 @@ public class CPolynomialCalculator {
     }
   }
 
-  public void setCallback(CCallback pCallback) {
-    CPolyWrapperJNI.CPolynomialCalculator_setCallback(swigCPtr, this, CCallback.getCPtr(pCallback), pCallback);
+  public void setCallback(CPolynomialCalculatorCallback pCallback) {
+    CPolyWrapperJNI.CPolynomialCalculator_setCallback(swigCPtr, this, CPolynomialCalculatorCallback.getCPtr(pCallback), pCallback);
   }
 
   public double calculate(double x) {

@@ -8,8 +8,7 @@
 %}
 
 /* turn on director wrapping Callback */
-/* %feature("director") CPolynomialCalculatorCallback; */
-%feature("director") CCallback;
+%feature("director") CPolynomialCalculatorCallback;
 
 /* This is the list of headers to be wrapped */
 %include "CPoly.h"

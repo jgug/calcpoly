@@ -11,12 +11,12 @@
 #ifndef SWIG_CPolyWrapper_WRAP_H_
 #define SWIG_CPolyWrapper_WRAP_H_
 
-class SwigDirector_CCallback : public CCallback, public Swig::Director {
+class SwigDirector_CPolynomialCalculatorCallback : public CPolynomialCalculatorCallback, public Swig::Director {
 
 public:
     void swig_connect_director(JNIEnv *jenv, jobject jself, jclass jcls, bool swig_mem_own, bool weak_global);
-    SwigDirector_CCallback(JNIEnv *jenv);
-    virtual ~SwigDirector_CCallback();
+    SwigDirector_CPolynomialCalculatorCallback(JNIEnv *jenv);
+    virtual ~SwigDirector_CPolynomialCalculatorCallback();
     virtual void getCoefficients(double *c0, double *c1, double *c2, double *c3);
 public:
     bool swig_overrides(int n) {

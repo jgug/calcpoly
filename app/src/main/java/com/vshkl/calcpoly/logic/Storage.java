@@ -15,8 +15,6 @@ public class Storage {
     static final String FILENAME = "settings";
     static final int SIZE = 4;
 
-    static final String TAG_WRITE_ERR = "Error on write";
-
     /**
      * Stores data as a string to file
      * @param context application context
@@ -32,10 +30,9 @@ public class Storage {
                 stringBuilder.append(val).append(",");
             }
             fos.write(stringBuilder.toString().getBytes());
-            Log.v("STORAGE", stringBuilder.toString());
             fos.close();
         } catch (IOException e) {
-            Log.e(TAG_WRITE_ERR, e.toString());
+            e.printStackTrace();
         }
     }
 
@@ -58,7 +55,6 @@ public class Storage {
 
         double[] array = new double[SIZE];
         String[] strArray = str.split(",");
-        Log.v("RESORE", strArray[0] + " " + strArray[1] + " " + strArray[2] + " " + strArray[3]);
         for (int i = 0; i < SIZE; i++) {
             array[i] = Double.parseDouble(strArray[i]);
         }
@@ -72,10 +68,8 @@ public class Storage {
      * @return boolean. Return true if file exists and false if not.
      */
     public static boolean hasFile(Context context) {
-        FileInputStream fis;
-
         try {
-            if ((fis = context.openFileInput(FILENAME)) != null) {
+            if (context.openFileInput(FILENAME) != null) {
                 return true;
             }
         } catch (FileNotFoundException e) {
